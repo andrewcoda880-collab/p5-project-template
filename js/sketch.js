@@ -1,4 +1,4 @@
-let colors = ['red', 'blue', 'green', 'orange', 'purple'];
+let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
 let currentColor = 'red';
 let colorIndex = 1;
 let shapeIndex = 0;
@@ -6,7 +6,7 @@ let lastTime = 0;
 let interval = 50;
 let sizeStep = 10;
 let circleSize = 10;
-let shapeBool = true;
+let myRandomValue = random(0,5)
 
 function setup() {
   createCanvas(1000, 1000);
@@ -14,8 +14,6 @@ function setup() {
 }
 
 function draw() {
-
-  background(255,255,255,20)
 
   noCursor()
 
@@ -28,20 +26,24 @@ function draw() {
     lastTime = millis()
   }
 
-  if (mouseIsPressed) {
-    fill(currentColor);
-  }
+  // circle
+  fill(currentColor)
+  circle(mouseX + myRandomValue, mouseY + myRandomValue, circleSize)
 
-
-  if (shapeBool) {circle(mouseX + random(0,5), mouseY + random(0,5), circleSize);}
-  if (!shapeBool) {square((mouseX - (circleSize/2)) + random(0,5), (mouseY - (circleSize/2)) + random(0,5), circleSize)}
+  // inner circle 1
+  fill(colors[(colorIndex + 1) % colors.length])
+  circle(mouseX + myRandomValue * 1.2, mouseY + myRandomValue * 1.2, circleSize - 30)
+  
+  // inner circle 2
+  fill(colors[(colorIndex + 2) % colors.length])
+  circle(mouseX + myRandomValue * 1.3, mouseY + myRandomValue * 1.3, circleSize - 50)
+  
+ 
   
 }
 
 // this only fires ONCE per click, not every frame
 function mousePressed() {
   currentColor = colors[colorIndex];
-  colorIndex = (colorIndex + 1) % colors.length
-
-  shapeBool = !shapeBool
+  colorIndex = (colorIndex + 1) % colors.length;
 }
