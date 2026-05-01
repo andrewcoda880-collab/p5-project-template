@@ -3,14 +3,16 @@ let currentColor = 'red';
 let colorIndex = 1;
 let shapeIndex = 0;
 let lastTime = 0;
-let interval = 50;
+let interval = 80;
 let sizeStep = 10;
-let circleSize = 10;
-let myRandomValue = random(0,5)
+let circleSize = 60;
+let myRandomValue = 0;
+
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(windowWidth, windowHeight);
   fill(currentColor)
+  myRandomValue = random(0,5)
 }
 
 function draw() {
@@ -20,8 +22,11 @@ function draw() {
   if (millis() - lastTime > interval){
 
     circleSize += sizeStep
-    if (circleSize >= 200 || circleSize <= 10) {
+    if (circleSize >= 240 || circleSize <= 35) {
       sizeStep = -sizeStep
+      colorIndex = (colorIndex + 1) % colors.length;
+      currentColor = colors[colorIndex];
+
     }
     lastTime = millis()
   }
@@ -31,14 +36,10 @@ function draw() {
   circle(mouseX + myRandomValue, mouseY + myRandomValue, circleSize)
 
   // inner circle 1
-  fill(colors[(colorIndex + 1) % colors.length])
+  fill('white')
   circle(mouseX + myRandomValue * 1.2, mouseY + myRandomValue * 1.2, circleSize - 30)
   
-  // inner circle 2
-  fill(colors[(colorIndex + 2) % colors.length])
-  circle(mouseX + myRandomValue * 1.3, mouseY + myRandomValue * 1.3, circleSize - 50)
   
- 
   
 }
 
