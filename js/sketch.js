@@ -7,44 +7,49 @@ let interval = 80;
 let sizeStep = 10;
 let circleSize = 60;
 let myRandomValue = 0;
+let showInstructions;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  fill(currentColor)
-  myRandomValue = random(0,5)
+  background(250);
+  myRandomValue = random(0, 5)
+  showInstructions = true;
 }
 
 function draw() {
 
   noCursor()
 
-  if (millis() - lastTime > interval){
+  if (keyIsDown(32)) {
 
-    circleSize += sizeStep
-    if (circleSize >= 240 || circleSize <= 35) {
-      sizeStep = -sizeStep
-      colorIndex = (colorIndex + 1) % colors.length;
-      currentColor = colors[colorIndex];
+    showInstructions = false;
 
+    if (millis() - lastTime > interval) {
+      circleSize += sizeStep
+      if (circleSize >= 240 || circleSize <= 35) {
+        sizeStep = -sizeStep
+        colorIndex = (colorIndex + 1) % colors.length;
+        currentColor = colors[colorIndex];
+      }
+      lastTime = millis()
     }
-    lastTime = millis()
+    // circle
+    fill(currentColor)
+    circle(mouseX + myRandomValue, mouseY + myRandomValue, circleSize)
+
+    // inner circle 1
+    fill('white')
+    circle(mouseX + myRandomValue * 1.2, mouseY + myRandomValue * 1.2, circleSize - 30)
+  }
+  
+  if (showInstructions) {
+    text("Press space", windowWidth / 2, windowHeight / 2)
   }
 
-  // circle
-  fill(currentColor)
-  circle(mouseX + myRandomValue, mouseY + myRandomValue, circleSize)
-
-  // inner circle 1
-  fill('white')
-  circle(mouseX + myRandomValue * 1.2, mouseY + myRandomValue * 1.2, circleSize - 30)
-  
-  
-  
 }
 
-// this only fires ONCE per click, not every frame
-function mousePressed() {
+function mouseClicked() {
   currentColor = colors[colorIndex];
   colorIndex = (colorIndex + 1) % colors.length;
 }
