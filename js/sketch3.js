@@ -3,20 +3,21 @@ let circleMin = 10;
 let circleSize = 10;
 let sizeStep = 5;
 let arcMin = 0;
-let arcMax = 240;
+let arcMax = 200;
 let arcSizeStep = 5;
 let arcs = [];
-
-
+let arcTypes;
+let arcType = 0;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    background(250);
-    angleMode(DEGREES)
+    background(0);
+    angleMode(DEGREES);
+    arcTypes = [OPEN, PIE];
 }
 
 function draw() {
-    background(250);
+    background(0);
     translate(windowWidth / 2, windowHeight / 2);
     noFill();
 
@@ -35,22 +36,28 @@ function draw() {
     }
 
     
-
+    stroke(255)
     arcs.push({
         x: mX + random(0,20),
         y: mY + random(0,20),
-        size: circleSize,
-        min: arcMin,
-        max: arcMax,
-        sw: random(0.1,1)
+        sizeX: circleSize + random(0,100),
+        sizeY: circleSize + random(0,100),
+        min: arcMin + random(0,40),
+        max: arcMax+ random(0,40),
+        sw: random(0.1,1),
+        at: arcTypes[arcType],
         }
     );
 
-    if (arcs.length > 10000) arcs.shift();
+    if (arcs.length > 500) arcs.shift();
 
     for (let a of arcs) {
         strokeWeight(a.sw);
-        arc(a.x, a.y, a.size, a.size, a.min, a.max);
-        arc(a.x , a.y , a.size + random(0,1), a.size + random(0,1), a.min + 180, a.max + 180);
+        arc(a.x, a.y, a.sizeX, a.sizeY, a.min, a.max, a.at);
     }
 }
+
+function keyPressed() {
+    arcType = (arcType + 1) % arcTypes.length;
+}
+

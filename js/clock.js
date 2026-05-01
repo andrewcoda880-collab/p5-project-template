@@ -43,7 +43,7 @@ strokeWeight(2);
 line(0,0,0,-radius * .8);
 pop();
 
-
+/*
 push();
 rotate(-60)
 for (let i=0; i < 12; i++){
@@ -53,6 +53,8 @@ for (let i=0; i < 12; i++){
 }
 
 pop();
+
+*/
 
 
 
