@@ -15,6 +15,9 @@ function draw() {
     lineX2 += random(-30, 30);
     lineY2 += random(-30, 30);
 
+    lineX2 = constrain(lineX2, -windowWidth / 2, windowWidth / 2);
+    lineY2 = constrain(lineY2, -windowHeight / 2, windowHeight / 2);
+
     lines.push({
         x1: lineX1,
         y1: lineY1,
@@ -22,7 +25,7 @@ function draw() {
         y2: lineY2
     });
 
-    //if (lines.length > 40) lines.shift();
+    if (lines.length > 40) lines.shift();
 
     for (let l of lines) {
         line(l.x1, l.y1, l.x2, l.y2);
