@@ -10,7 +10,7 @@ let arcTypes;
 let arcType = 0;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowHeight, WEBGL);
     background(0);
     angleMode(DEGREES);
     arcTypes = [OPEN, PIE];
@@ -18,7 +18,7 @@ function setup() {
 
 function draw() {
     background(0);
-    translate(windowWidth / 2, windowHeight / 2);
+   // translate(windowWidth / 2, windowHeight / 2);
     noFill();
 
     let mX = mouseX - windowWidth / 2;
